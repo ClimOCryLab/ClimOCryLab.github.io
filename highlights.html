@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Highlights — ClimOC-Lab</title>
+  <meta name="description" content="Conference presentations, invited talks, awards, and media coverage from the ClimOC-Lab at the Centre for Atmospheric Sciences, IIT Delhi." />
+
+  <!-- Social preview -->
+  <meta property="og:title" content="ClimOC-Lab — Highlights" />
+  <meta property="og:description" content="Milestones and recognition from the ClimOC-Lab: conferences, talks, awards, and media coverage." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('intro-done');},2400);</script>
+  <style>
+    /* ===== Highlights page ===== */
+    :root{
+      --h-award:#C68A1E; --h-award-tint:#FBF3E1;
+      --h-conf:#1A86A0;  --h-conf-tint:#E7F4F7;
+      --h-talk:#7B5EA7;  --h-talk-tint:#F1ECF8;
+      --h-media:#C0436B; --h-media-tint:#FBEBF0;
+    }
+
+    /* condensed stat header */
+    .hstats{ display:flex; flex-wrap:wrap; gap:.85rem; margin:0 0 2.2rem; }
+    .hstat{ flex:1 1 150px; background:linear-gradient(180deg,#fff,var(--c-mist)); border:1px solid var(--c-line);
+      border-radius:14px; padding:1.05rem 1.2rem; }
+    .hstat__num{ font-family:var(--font-display); font-weight:700; font-size:1.75rem; color:var(--c-ocean);
+      line-height:1.05; letter-spacing:-.015em; }
+    .hstat__label{ font-family:var(--font-mono); font-size:.71rem; letter-spacing:.07em; text-transform:uppercase;
+      color:var(--c-slate); margin-top:.35rem; }
+
+    .highlights-intro{ color:var(--c-slate); font-size:1.06rem; line-height:1.72; margin:.2rem 0 2rem; text-align:justify; }
+
+    /* filter bar */
+    .hfilter{ display:flex; flex-wrap:wrap; gap:.6rem; margin:0 0 2.6rem; }
+    .hfilter__btn{
+      display:inline-flex; align-items:center; gap:.45rem;
+      font-family:var(--font-mono); font-size:.78rem; letter-spacing:.03em; color:var(--c-ocean);
+      background:#fff; border:1.5px solid var(--c-line); border-radius:999px; padding:.55rem 1.15rem;
+      cursor:pointer; transition:border-color .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+    .hfilter__btn:hover{ border-color:var(--cat-color, var(--c-current)); }
+    .hfilter__btn svg{ width:15px; height:15px; color:var(--cat-color, var(--c-slate)); flex:0 0 auto; }
+    .hfilter__btn.is-active{ background:var(--cat-color, var(--c-ocean)); border-color:var(--cat-color, var(--c-ocean)); color:#fff;
+      box-shadow:0 8px 18px -10px var(--cat-color, transparent); }
+    .hfilter__btn.is-active svg{ color:#fff; }
+
+    /* grid of compact, expandable cards */
+    .hgrid{ display:grid; grid-template-columns:repeat(2,1fr); align-items:start; gap:1rem; }
+    @media (max-width:760px){ .hgrid{ grid-template-columns:1fr; } }
+
+    .hitem.is-hidden{ display:none; }
+
+    .hitem__card{ background:#fff; border:1px solid var(--c-line); border-radius:14px; overflow:hidden;
+      transition:border-color .2s ease, box-shadow .2s ease; }
+    .hitem__card:hover{ border-color:var(--cat-color); box-shadow:0 14px 32px -24px rgba(8,34,48,.5); }
+
+    .hitem__header{ display:flex; align-items:center; gap:.85rem;
+      padding:.9rem 1.1rem; cursor:pointer; background:none; border:0; width:100%; text-align:left;
+      font:inherit; color:inherit; }
+    .hitem__icon{ flex:0 0 auto; width:38px; height:38px; border-radius:50%;
+      background:var(--cat-color); color:#fff; display:grid; place-items:center; }
+    .hitem__icon svg{ width:17px; height:17px; }
+    .hitem__headtext{ min-width:0; flex:1 1 auto; }
+    .hitem__title{ font-size:.98rem; font-weight:600; color:var(--c-ink); margin:0; letter-spacing:-.005em;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .hitem__date{ font-family:var(--font-mono); font-size:.7rem; color:var(--c-slate); margin-top:.3rem; display:block; }
+    .hitem__chevron{ flex:0 0 auto; width:18px; height:18px; color:var(--c-slate); transition:transform .25s ease; }
+    .hitem.is-open .hitem__chevron{ transform:rotate(180deg); }
+
+    .hitem__body{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+    .hitem__body-inner{ padding:.95rem 1.2rem 1.15rem; border-top:1px solid var(--c-line); }
+
+    .hcard__desc{ color:var(--c-slate); line-height:1.62; margin:0; text-align:justify; }
+    .hcard__desc a{ color:var(--c-current); font-weight:600; text-decoration:underline;
+      text-decoration-color:rgba(26,134,160,.35); text-underline-offset:3px; white-space:nowrap; }
+    .hcard__desc a:hover{ text-decoration-color:currentColor; }
+    .hcard__list{ list-style:none; margin:.85rem 0 0; padding:0; border-top:1px solid var(--c-line); }
+    .hcard__list li{ padding:.6rem 0; border-bottom:1px solid var(--c-line); color:var(--c-ink); line-height:1.55; font-size:.94rem; }
+    .hcard__list li:last-child{ border-bottom:0; }
+    .hcard__list-label{ font-family:var(--font-mono); font-size:.66rem; letter-spacing:.05em; text-transform:uppercase;
+      color:var(--c-slate); display:block; margin-bottom:.2rem; }
+    .hcard__list a{ color:var(--c-current); font-weight:600; text-decoration:underline;
+      text-decoration-color:rgba(26,134,160,.35); text-underline-offset:3px; }
+    .hcard__list a:hover{ text-decoration-color:currentColor; }
+    .hcard__video{ margin:.95rem 0 0; border-radius:10px; overflow:hidden; aspect-ratio:16/9; background:#000; }
+    .hcard__video iframe{ width:100%; height:100%; border:0; display:block; }
+
+    /* show more */
+    .hshowmore{ display:flex; justify-content:center; margin-top:1.8rem; }
+    .hshowmore__btn{
+      font-family:var(--font-mono); font-size:.82rem; letter-spacing:.03em; color:var(--c-ocean);
+      background:#fff; border:1.5px solid var(--c-line); border-radius:999px; padding:.7rem 1.6rem;
+      cursor:pointer; transition:border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+    }
+    .hshowmore__btn:hover{ border-color:var(--c-current); box-shadow:0 10px 22px -14px rgba(8,34,48,.4); transform:translateY(-1px); }
+    .hshowmore.is-done{ display:none; }
+  </style>
+  <link rel="icon" type="image/png" href="main-logo/climoc-logo.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html" aria-label="ClimOC-Lab home">
+        <img class="brand__img" src="main-logo/climoc-logo.png" alt="ClimOC-Lab" style="height:48px;width:auto;display:block">
+      </a>
+
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav__menu" id="navMenu" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="people.html">People</a>
+        <a href="publications.html">Publications</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="highlights.html" class="is-active" aria-current="page">Highlights</a>
+        <a href="contact.html">Contact</a>
+        <a href="join.html" class="nav__cta">Join us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HIGHLIGHTS ============ -->
+    <section class="section" id="highlights">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Highlights</p>
+          <h2 class="section__title">Milestones &amp; Recognition</h2>
+        </div>
+
+        <div class="hstats reveal">
+          <div class="hstat"><div class="hstat__num">13</div><div class="hstat__label">Highlights</div></div>
+          <div class="hstat"><div class="hstat__num">6</div><div class="hstat__label">Conferences &amp; Awards</div></div>
+          <div class="hstat"><div class="hstat__num">4</div><div class="hstat__label">Media Features</div></div>
+          <div class="hstat"><div class="hstat__num">2022–26</div><div class="hstat__label">Years Covered</div></div>
+        </div>
+
+        <div class="reveal">
+          <p class="highlights-intro">Conference presentations, invited talks, awards, and media coverage documenting the ClimOC-Lab's research as it reaches new audiences.</p>
+        </div>
+
+        <div class="hfilter reveal" role="tablist" aria-label="Filter highlights by category">
+          <button type="button" class="hfilter__btn is-active" data-filter="all">All</button>
+          <button type="button" class="hfilter__btn" data-filter="awards" style="--cat-color:var(--h-award)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v4a4 4 0 0 1-8 0V4Z"/><path d="M8 4H5a2 2 0 0 0 0 4h1M16 4h3a2 2 0 0 1 0 4h-1"/><path d="M12 12v4M9 20h6M9.5 16h5l.5 4H9l.5-4Z"/></svg>Awards</button>
+          <button type="button" class="hfilter__btn" data-filter="conference" style="--cat-color:var(--h-conf)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="10" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg>Conference</button>
+          <button type="button" class="hfilter__btn" data-filter="talks" style="--cat-color:var(--h-talk)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 20h6M12 16v4M7 9l3 2-3 2M13 13h4"/></svg>Talks &amp; Lectures</button>
+          <button type="button" class="hfilter__btn" data-filter="media" style="--cat-color:var(--h-media)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V4Z"/><path d="M17 21a2 2 0 0 0 2-2V7h1"/><path d="M7 8h6M7 11h6M7 14h4"/></svg>Media</button>
+        </div>
+
+        <div class="hgrid" id="hlist">
+
+            <!-- EGU 2026 -->
+            <div class="hitem reveal" data-category="conference" style="--cat-color:var(--h-conf)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="10" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">EGU General Assembly 2026, Vienna, Austria</span>
+                    <span class="hitem__date">May 2026</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Co-convened two sessions on marine heatwaves and Indian Ocean variability at Europe's largest geosciences meeting. <a href="https://www.egu26.eu/" target="_blank" rel="noopener">egu26.eu ↗</a></p>
+                    <ul class="hcard__list">
+                      <li><span class="hcard__list-label">Session Co-convener · OS1.14</span>Marine Heatwaves: drivers, impacts and interactions — <a href="https://meetingorganizer.copernicus.org/EGU26/session/56216" target="_blank" rel="noopener">session details ↗</a></li>
+                      <li><span class="hcard__list-label">Session Co-convener · OS1.10</span>Understanding the Indian Ocean's past, present and future — <a href="https://meetingorganizer.copernicus.org/EGU26/session/56295" target="_blank" rel="noopener">session details ↗</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- WOSC 2026 -->
+            <div class="hitem reveal" data-category="conference" style="--cat-color:var(--h-conf)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="10" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">World Ocean Science Congress (WOSC 2026), Goa, India</span>
+                    <span class="hitem__date">February 2026</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Co-convened a session on marine heatwave science at India's premier ocean science congress, hosted by CSIR-National Institute of Oceanography. <a href="https://wosc.in/" target="_blank" rel="noopener">wosc.in ↗</a></p>
+                    <ul class="hcard__list">
+                      <li><span class="hcard__list-label">Session Co-convener</span>Advancing marine heatwave science: Mechanisms, impacts, interactions, and societal consequences</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BACO-25 conference -->
+            <div class="hitem reveal" data-category="conference" style="--cat-color:var(--h-conf)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="10" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">BACO-25, Busan, South Korea</span>
+                    <span class="hitem__date">July 2025</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Presented research at the joint IAMAS–IACS–IAPSO assembly, the first joint gathering of atmosphere, cryosphere, and ocean scientists in Asia in two decades. <a href="https://baco-25.org/index.asp" target="_blank" rel="noopener">baco-25.org ↗</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BACO-25 award -->
+            <div class="hitem reveal" data-category="awards" style="--cat-color:var(--h-award)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v4a4 4 0 0 1-8 0V4Z"/><path d="M8 4H5a2 2 0 0 0 0 4h1M16 4h3a2 2 0 0 1 0 4h-1"/><path d="M12 12v4M9 20h6M9.5 16h5l.5 4H9l.5-4Z"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">BACO-25 Travel Grant</span>
+                    <span class="hitem__date">July 2025</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Awarded a $1,000 USD travel grant to present "Deep Learning-Based Mesoscale Ocean Eddy Detection in the Bay of Bengal" at BACO-25. <a href="https://baco-25.org/new/sub3/sub35.asp" target="_blank" rel="noopener">grant details ↗</a></p>
+                    <ul class="hcard__list">
+                      <li><span class="hcard__list-label">Abstract</span>Deep Learning-Based Mesoscale Ocean Eddy Detection in the Bay of Bengal — <a href="https://baco-25.org/new/down/%5BBACO-25%5D%20Abstract%20Book%200720.pdf" target="_blank" rel="noopener">abstract book ↗</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Indian Express -->
+            <div class="hitem reveal" data-category="media" style="--cat-color:var(--h-media)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V4Z"/><path d="M17 21a2 2 0 0 0 2-2V7h1"/><path d="M7 8h6M7 11h6M7 14h4"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">Shifting to rail transport can help environment, economy</span>
+                    <span class="hitem__date">May 2025</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">A modal shift from road to rail is crucial for India, which is one of the world's largest greenhouse gas emitters, with 14% coming from the transport sector alone. <a href="https://indianexpress.com/article/opinion/shifting-to-rail-transport-can-help-environment-economy-10018539/" target="_blank" rel="noopener">Read on Indian Express ↗</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ICTS workshop talk -->
+            <div class="hitem reveal" data-category="talks" style="--cat-color:var(--h-talk)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 20h6M12 16v4M7 9l3 2-3 2M13 13h4"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">Workshop Talk, ICTS Bengaluru</span>
+                    <span class="hitem__date">May 2024</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Presented "Detection of Mesoscale Oceanic Eddies Over Bay of Bengal Using Explainable Deep Learning Method" as part of the ICTS programme, Theoretical and Practical Perspectives in Geophysical Fluid Dynamics.</p>
+                    <div class="hcard__video">
+                      <iframe src="https://www.youtube.com/embed/QouPRZd8ZCE" title="Detection of Mesoscale Oceanic Eddies Over Bay of Bengal Using Explainable Deep Learning Method" loading="lazy" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- EGU 2024 conference -->
+            <div class="hitem reveal" data-category="conference" style="--cat-color:var(--h-conf)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="10" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">EGU General Assembly 2024, Vienna, Austria</span>
+                    <span class="hitem__date">April 2024</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Co-convened two sessions on marine heatwaves and tropical ocean variability. <a href="https://www.egu24.eu/" target="_blank" rel="noopener">egu24.eu ↗</a></p>
+                    <ul class="hcard__list">
+                      <li><span class="hcard__list-label">Session Co-convener · OS1.10</span>Marine Heatwaves: drivers, impacts and interactions — <a href="https://meetingorganizer.copernicus.org/EGU24/session/48530" target="_blank" rel="noopener">session details ↗</a></li>
+                      <li><span class="hcard__list-label">Session Co-convener · OS1.3</span>Variability in the tropical Atlantic and Indian Ocean and their impacts on marine ecosystems and teleconnections across timescales — <a href="https://meetingorganizer.copernicus.org/EGU24/session/48026" target="_blank" rel="noopener">session details ↗</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Roland Schlich award -->
+            <div class="hitem reveal" data-category="awards" style="--cat-color:var(--h-award)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v4a4 4 0 0 1-8 0V4Z"/><path d="M8 4H5a2 2 0 0 0 0 4h1M16 4h3a2 2 0 0 1 0 4h-1"/><path d="M12 12v4M9 20h6M9.5 16h5l.5 4H9l.5-4Z"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">Roland Schlich Early Career Scientist's Travel Award</span>
+                    <span class="hitem__date">April 2024</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Awarded €755 to attend EGU 2024. <a href="https://www.egu24.eu/guidelines/supports_and_waivers.html" target="_blank" rel="noopener">award guidelines ↗</a></p>
+                    <ul class="hcard__list">
+                      <li><span class="hcard__list-label">Presented to session OS1.10</span>Interactions Between a Marine Heatwave and Tropical Cyclone Amphan in the Bay of Bengal in 2020 — <a href="https://meetingorganizer.copernicus.org/EGU24/EGU24-508.html" target="_blank" rel="noopener">abstract ↗</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Miranda House lecture -->
+            <div class="hitem reveal" data-category="talks" style="--cat-color:var(--h-talk)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 20h6M12 16v4M7 9l3 2-3 2M13 13h4"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">Inaugural Lecture, Miranda House</span>
+                    <span class="hitem__date">November 2023</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Delivered the inaugural lecture on the climate system and its change for Miranda House, University of Delhi. <a href="https://www.linkedin.com/feed/update/urn:li:activity:7133514129012666368/" target="_blank" rel="noopener">View on LinkedIn ↗</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Don Bosco lecture -->
+            <div class="hitem reveal" data-category="talks" style="--cat-color:var(--h-talk)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 20h6M12 16v4M7 9l3 2-3 2M13 13h4"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">Lecture for Don Bosco School Students</span>
+                    <span class="hitem__date">October 2023</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Spoke to students on the role of the oceans in the climate system. <a href="https://x.com/CERCA_IITD/status/1713833153994109011/photo/2" target="_blank" rel="noopener">View on X ↗</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mongabay -->
+            <div class="hitem reveal" data-category="media" style="--cat-color:var(--h-media)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V4Z"/><path d="M17 21a2 2 0 0 0 2-2V7h1"/><path d="M7 8h6M7 11h6M7 14h4"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">Understanding cyclone behaviour in a changing climate</span>
+                    <span class="hitem__date">July 2022</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">We need to have better predictive capacities for marine heatwaves because when they coincide with other extremes such as cyclones, they can turn out to be big disasters. <a href="https://india.mongabay.com/2022/07/understanding-cyclone-behaviour-in-a-changing-climate/" target="_blank" rel="noopener">Read on Mongabay India ↗</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Down To Earth -->
+            <div class="hitem reveal" data-category="media" style="--cat-color:var(--h-media)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V4Z"/><path d="M17 21a2 2 0 0 0 2-2V7h1"/><path d="M7 8h6M7 11h6M7 14h4"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">Oceans Great Dying 2.0: Earth's climate moderator is warming faster</span>
+                    <span class="hitem__date">June 2022</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Oceans are heating up as they cross their natural capacity to sink carbon and atmospheric heat induced by GHG emissions. It will further disrupt life above the oceans. <a href="https://www.downtoearth.org.in/climate-change/oceans-great-dying-2-0-earth-s-climate-moderator-is-warming-faster-83461" target="_blank" rel="noopener">Read on Down To Earth ↗</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- The Hindu -->
+            <div class="hitem reveal" data-category="media" style="--cat-color:var(--h-media)">
+              <div class="hitem__card">
+                <button type="button" class="hitem__header">
+                  <span class="hitem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V4Z"/><path d="M17 21a2 2 0 0 0 2-2V7h1"/><path d="M7 8h6M7 11h6M7 14h4"/></svg></span>
+                  <span class="hitem__headtext">
+                    <span class="hitem__title">How marine heatwave fuelled super cyclone Amphan</span>
+                    <span class="hitem__date">June 2022</span>
+                  </span>
+                  <svg class="hitem__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="hitem__body">
+                  <div class="hitem__body-inner">
+                    <p class="hcard__desc">Besides surface warming, ocean stratification and warming below the surface also played a role. <a href="https://www.thehindu.com/sci-tech/how-marine-heatwave-fuelled-super-cyclone-amphan/article65537156.ece" target="_blank" rel="noopener">Read on The Hindu ↗</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--
+            ADD A HIGHLIGHT: copy one <div class="hitem reveal" data-category="..." style="--cat-color:var(--h-...)"> block above,
+            in chronological order (newest first).
+            - data-category: conference / media / awards / talks — controls filtering
+            - style="--cat-color:...": pick var(--h-conf) / var(--h-media) / var(--h-award) / var(--h-talk) to match
+            - the node's inline <svg> icon: reuse the matching icon from another entry in the same category
+            - hcard__list is optional (sub-items); hcard__video is optional (embed a video instead of/alongside text)
+            -->
+
+          </div>
+
+        <div class="hshowmore reveal" id="hshowmore">
+          <button type="button" class="hshowmore__btn" id="hshowmoreBtn">Show more highlights</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo-chip">
+          <img src="main-logo/climoc-logo.png" alt="ClimOC-Lab" style="height:40px;width:auto;display:block">
+        </span>
+        <p>Centre for Atmospheric Sciences, IIT Delhi</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="people.html">People</a>
+        <a href="publications.html">Publications</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="highlights.html">Highlights</a>
+        <a href="join.html">Join us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+    <div class="container footer__legal">
+      <p>&copy; <span id="year">2025</span> ClimOC-Lab. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      var PAGE_SIZE = 4;
+      var filterBtns = [].slice.call(document.querySelectorAll('.hfilter__btn'));
+      var items = [].slice.call(document.querySelectorAll('.hitem'));
+      var showMoreWrap = document.getElementById('hshowmore');
+      var showMoreBtn = document.getElementById('hshowmoreBtn');
+      if (!items.length) return;
+
+      var currentFilter = 'all';
+      var visibleCount = PAGE_SIZE;
+
+      /* accordion: only one open at a time */
+      items.forEach(function (item) {
+        var header = item.querySelector('.hitem__header');
+        var body = item.querySelector('.hitem__body');
+        header.addEventListener('click', function () {
+          var opening = !item.classList.contains('is-open');
+          items.forEach(function (other) {
+            other.classList.remove('is-open');
+            other.querySelector('.hitem__body').style.maxHeight = null;
+          });
+          if (opening) {
+            item.classList.add('is-open');
+            body.style.maxHeight = body.scrollHeight + 40 + 'px';
+          }
+        });
+      });
+
+      /* filter bar: switching category resets pagination back to the first page */
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          currentFilter = btn.getAttribute('data-filter');
+          visibleCount = PAGE_SIZE;
+          render();
+        });
+      });
+
+      showMoreBtn.addEventListener('click', function () {
+        visibleCount += PAGE_SIZE;
+        render();
+      });
+
+      /* For "All": lead with the single latest entry from each category (one per
+         category = 4, matching PAGE_SIZE), then the rest in normal newest-first
+         order once "Show more" is clicked. Items are already newest-first in the
+         DOM within their own category, so the first occurrence of each category
+         found while walking the list is that category's latest entry. */
+      function getOrderedList() {
+        if (currentFilter !== 'all') {
+          return items.filter(function (item) {
+            return item.getAttribute('data-category') === currentFilter;
+          });
+        }
+        var seen = {};
+        var curated = [];
+        var rest = [];
+        items.forEach(function (item) {
+          var cat = item.getAttribute('data-category');
+          if (!seen[cat]) {
+            seen[cat] = true;
+            curated.push(item);
+          } else {
+            rest.push(item);
+          }
+        });
+        return curated.concat(rest);
+      }
+
+      function render() {
+        var ordered = getOrderedList();
+
+        items.forEach(function (item) { item.classList.add('is-hidden'); });
+        ordered.slice(0, visibleCount).forEach(function (item) {
+          item.classList.remove('is-hidden');
+        });
+
+        /* collapse anything that just got hidden */
+        items.forEach(function (item) {
+          if (item.classList.contains('is-hidden') && item.classList.contains('is-open')) {
+            item.classList.remove('is-open');
+            item.querySelector('.hitem__body').style.maxHeight = null;
+          }
+        });
+
+        var remaining = ordered.length - visibleCount;
+        showMoreWrap.classList.toggle('is-done', remaining <= 0);
+        showMoreBtn.textContent = remaining > 0
+          ? 'Show more highlights (' + remaining + ')'
+          : 'Show more highlights';
+      }
+
+      render();
+
+    })();
+  </script>
+</body>
+</html>
